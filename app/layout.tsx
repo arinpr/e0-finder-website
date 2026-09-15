@@ -26,7 +26,7 @@ const playStoreUrl = siteConfig.playStoreUrl
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'E0 Finder - E0 Fuel Finder and Petrol Pump Map',
+    default: 'E0 Finder — Ethanol-Free E0 Petrol Pump Finder India [Live Data]',
     template: '%s | E0 Finder',
   },
   description:
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: siteUrl,
-    title: 'E0 Finder - E0 Fuel Finder and Petrol Pump Map',
+    title: 'E0 Finder — Ethanol-Free E0 Petrol Pump Finder India',
     description:
       'Search E0 fuel, XP100 pumps and reported ethanol-free petrol stations near you with live map updates and navigation.',
     siteName: 'E0 Finder',
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'E0 Finder - E0 Fuel Finder and Petrol Pump Map',
+    title: 'E0 Finder — Ethanol-Free E0 Petrol Pump Finder India',
     description:
       'Find E0 fuel, XP100 pumps and ethanol-free petrol stations near you in India.',
     images: [seoImages.appDownloadOg.path],
@@ -168,10 +168,15 @@ const orgSchema = {
   alternateName: ['E0 Finder App', 'EO Finder', 'E Zero Finder', 'E0 Fuel Finder', 'E0 Petrol Pump Locator'],
   url: siteUrl,
   logo: `${siteUrl}/app-icon.png`,
-  sameAs: [playStoreUrl],
+  sameAs: [
+    playStoreUrl,
+    'https://www.linkedin.com/in/anupam-pradhan/',
+  ],
   founder: {
     '@type': 'Person',
     name: siteConfig.founderName,
+    url: 'https://www.linkedin.com/in/anupam-pradhan/',
+    sameAs: ['https://www.linkedin.com/in/anupam-pradhan/'],
   },
   contactPoint: {
     '@type': 'ContactPoint',

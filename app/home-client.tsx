@@ -40,6 +40,9 @@ import {
   Play,
   Share2,
   Lightbulb,
+  Bike,
+  Compass,
+  PlusCircle,
 } from 'lucide-react'
 import type { BlogSummary } from '@/lib/blog-data'
 import { citiesData } from '@/lib/city-data'
@@ -379,28 +382,16 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
     setMenuOpen(false)
   }
 
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.a,
-      },
-    })),
-  }
+  // FAQPage schema removed — Google restricted FAQPage rich results to
+  // government and healthcare authority sites only (August 2023).
+  // FAQ content is still rendered visually for users.
 
   return (
     <main id="home" className="relative min-h-screen text-foreground overflow-x-hidden">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:shadow-lg">
+        Skip to content
+      </a>
       <ScrollReveal />
-
-      {/* FAQ Schema for Google SERP Rich Snippets */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
@@ -416,6 +407,30 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
                 {label}
               </button>
             ))}
+            <Link
+              href="/what-is-e0-petrol"
+              className="text-xs xl:text-sm font-semibold text-foreground/80 hover:text-primary whitespace-nowrap"
+            >
+              What is E0?
+            </Link>
+            <Link
+              href="/vehicles"
+              className="text-xs xl:text-sm font-semibold text-foreground/80 hover:text-primary whitespace-nowrap"
+            >
+              Vehicles
+            </Link>
+            <Link
+              href="/highways"
+              className="text-xs xl:text-sm font-semibold text-foreground/80 hover:text-primary whitespace-nowrap"
+            >
+              Highways
+            </Link>
+            <Link
+              href="/report-pump"
+              className="text-xs xl:text-sm font-semibold text-foreground/80 hover:text-primary whitespace-nowrap"
+            >
+              Report Pump
+            </Link>
             <Link
               href="/find"
               className="text-xs xl:text-sm font-semibold text-foreground/80 hover:text-primary flex items-center gap-1 whitespace-nowrap"
@@ -471,6 +486,41 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
               </button>
             ))}
             <Link
+              href="/what-is-e0-petrol"
+              className="rounded-md px-3 py-2 text-left font-semibold text-foreground/80 hover:bg-muted flex items-center gap-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Fuel size={16} /> What is E0?
+            </Link>
+            <Link
+              href="/vehicles"
+              className="rounded-md px-3 py-2 text-left font-semibold text-foreground/80 hover:bg-muted flex items-center gap-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Bike size={16} /> Vehicle Compatibility
+            </Link>
+            <Link
+              href="/highways"
+              className="rounded-md px-3 py-2 text-left font-semibold text-foreground/80 hover:bg-muted flex items-center gap-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              <Compass size={16} /> Highway Corridors
+            </Link>
+            <Link
+              href="/report-pump"
+              className="rounded-md px-3 py-2 text-left font-semibold text-foreground/80 hover:bg-muted flex items-center gap-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              <PlusCircle size={16} /> Report a Pump
+            </Link>
+            <Link
+              href="/city"
+              className="rounded-md px-3 py-2 text-left font-semibold text-foreground/80 hover:bg-muted flex items-center gap-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              <MapPin size={16} /> Cities Index
+            </Link>
+            <Link
               href="/find"
               className="rounded-md px-3 py-2 text-left font-semibold text-foreground/80 hover:bg-muted flex items-center gap-2"
               onClick={() => setMenuOpen(false)}
@@ -503,7 +553,7 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
       </header>
 
       {/* Hero Section — light premium panel */}
-      <section data-reveal-skip className="relative overflow-hidden">
+      <section id="main" data-reveal-skip className="relative overflow-hidden">
         {/* soft ambient glow + grid backdrop */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.07] via-background to-background" />
@@ -560,6 +610,38 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
                 className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-6 py-4 text-sm font-bold text-foreground shadow-xs transition-colors hover:border-primary hover:text-primary"
               >
                 <MapPin size={17} /> Open Live Map
+              </Link>
+            </div>
+
+            {/* Quick Hub Navigation Pills */}
+            <div className="e0-fade-up e0-delay-4 mt-6 flex flex-wrap items-center gap-2">
+              <Link
+                href="/what-is-e0-petrol"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-card/60 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur hover:border-primary/50 hover:bg-card hover:text-primary transition-all shadow-xs"
+              >
+                <Fuel size={13} className="text-primary" />
+                <span>What is E0?</span>
+              </Link>
+              <Link
+                href="/vehicles"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-card/60 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur hover:border-primary/50 hover:bg-card hover:text-primary transition-all shadow-xs"
+              >
+                <Bike size={13} className="text-primary" />
+                <span>Vehicle Checker</span>
+              </Link>
+              <Link
+                href="/highways"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-card/60 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur hover:border-primary/50 hover:bg-card hover:text-primary transition-all shadow-xs"
+              >
+                <Compass size={13} className="text-primary" />
+                <span>Highway Stops</span>
+              </Link>
+              <Link
+                href="/report-pump"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-card/60 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur hover:border-primary/50 hover:bg-card hover:text-primary transition-all shadow-xs"
+              >
+                <PlusCircle size={13} className="text-primary" />
+                <span>Report a Pump</span>
               </Link>
             </div>
 
@@ -1334,6 +1416,124 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
             </article>
           ))}
         </div>
+
+        {/* Curated Guides Directory — guarantees 1-hop crawl depth for all core guides */}
+        <div className="mt-8 rounded-3xl border border-border bg-card/50 p-6 sm:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border pb-4">
+            <div>
+              <h3 className="text-base font-bold text-foreground sm:text-lg">
+                Essential Engine &amp; Fuel Testing Guides
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                In-depth guides for high-compression engines, direct injection cars, and density testing in India.
+              </p>
+            </div>
+            <Link href="/blog" className="text-xs font-semibold text-primary hover:underline shrink-0">
+              Browse All Guides →
+            </Link>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-xs">
+            <Link
+              href="/blog/ethanol-free-petrol-india-complete-guide-e0-xp100-power100"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <Fuel size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Complete E0 Petrol Guide</strong>
+                <span className="text-[11px] text-muted-foreground">XP100 vs poWer100 vs Speed 100 explained</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/how-to-check-petrol-density-at-indian-fuel-pumps"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <Gauge size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Petrol Density Test Guide</strong>
+                <span className="text-[11px] text-muted-foreground">How to read hydrometer readings at the pump</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/ktm-duke-rc-390-throttle-jerk-ethanol-fix"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <Bike size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">KTM 390 Throttle Jerk Fix</strong>
+                <span className="text-[11px] text-muted-foreground">Solving stalling &amp; knock on Duke / RC</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/royal-enfield-bullet-hunter-himalayan-ethanol-guide"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <Bike size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Royal Enfield Ethanol Guide</strong>
+                <span className="text-[11px] text-muted-foreground">Classic, Bullet &amp; Himalayan 450 fuel tips</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/turbo-petrol-cars-tsi-gdi-ethanol-effects"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <Wrench size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Turbo Petrol (TSI / GDi) Effects</strong>
+                <span className="text-[11px] text-muted-foreground">Direct injection carbon &amp; HPFP protection</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/two-wheeler-ethanol-damage-prevention"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <ShieldCheck size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Two-Wheeler Damage Prevention</strong>
+                <span className="text-[11px] text-muted-foreground">Protecting fuel pumps, lines &amp; carburetors</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/viral-instagram-petrol-water-test-guide"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <HelpCircle size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Water Separation Test Truth</strong>
+                <span className="text-[11px] text-muted-foreground">The science behind viral fuel test videos</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/petrol-additives-in-india-do-they-neutralize-ethanol"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <Flame size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Petrol Additives in India</strong>
+                <span className="text-[11px] text-muted-foreground">Do fuel stabilizers neutralize ethanol?</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/blog/yamaha-rx100-rd350-2-stroke-oil-separation-disaster"
+              className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background/50 p-3 hover:border-primary/50 hover:text-primary transition-all"
+            >
+              <AlertCircle size={16} className="text-primary shrink-0 mt-0.5" />
+              <div>
+                <strong className="block text-foreground font-semibold">Yamaha RX100 / RD350 2-Stroke</strong>
+                <span className="text-[11px] text-muted-foreground">2T oil separation risks in vintage engines</span>
+              </div>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Popular Cities Coverage */}
@@ -1535,6 +1735,11 @@ export default function Page({ posts: blogPosts, totalPosts }: { posts: BlogSumm
             </div>
             <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-primary-foreground/85">
               <a href="/find" className="hover:underline">Find E0 Petrol</a>
+              <a href="/what-is-e0-petrol" className="hover:underline">What is E0?</a>
+              <a href="/vehicles" className="hover:underline">Vehicles</a>
+              <a href="/highways" className="hover:underline">Highways</a>
+              <a href="/city" className="hover:underline">Cities</a>
+              <a href="/report-pump" className="hover:underline">Report Pump</a>
               <a href="/download" className="hover:underline">Download App</a>
               <a href="/about" className="hover:underline">About</a>
               <a href="/methodology" className="hover:underline">Methodology</a>
